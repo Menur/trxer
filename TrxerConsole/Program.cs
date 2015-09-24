@@ -30,7 +30,16 @@ namespace TrxerConsole
                 return;
             }
             Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+            try
+            {
+                Transform(args[0], PrepareXsl());
+            }
+            catch (Exception ex)
+            {
+                Console.OpenStandardError();
+                Console.Error.WriteLine("Failed to transform TRX: {0}", ex.Message);
+                System.Threading.Thread.Sleep(5000);
+            }
         }
 
         /// <summary>
